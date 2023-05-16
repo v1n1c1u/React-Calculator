@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import Calculator from './main/calculator';
+import Header from './main/header';
 import React from 'react';
 import './App.css';
 
 function App() {
   return (
     <React.Fragment>
-      <h1>Calculator</h1>
+      <Header />
       <Calculator />
     </React.Fragment>
 

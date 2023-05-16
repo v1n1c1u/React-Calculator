@@ -1,7 +1,22 @@
 .calculator {
-    height:750px;
-    width: 450px;
-    border-radius: 5px;
+    height:680px;
+    width: 410px;
+    border-radius: 10px;
     overflow: hidden;
     background-color: darkslategray;
+    box-shadow: 5px 5px 10px black;
+
+}
+#zero-button{
+    width: 180px;
+}
+#keyboard{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin: auto;
+    background-color: rgb(6, 61, 61);
+    
 }

@@ -1,0 +1,42 @@
+
+.App-logo {
+    height: calc(25px + 2vmin);
+    pointer-events: none; 
+    position: relative;
+}
+.logo-container {
+    position: relative;
+    width: calc(32px + 2vmin);
+    height: auto;
+}
+  
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+  
+.App-header {
+    color:whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(15px + 2vmin);
+}
+h1 {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: lighter;
+    padding-bottom: 10px;
+
+}
+
+  
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+  
