@@ -1,22 +1,26 @@
-
 .display-text {
-    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-    color: #61dafb;
-    font-size: 70px;
-    font-weight: lighter;
-  }
-  .display {
-    height: 150px;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 10px;
-    min-height: 80x;
-    text-align: end;
-    white-space: nowrap;
-  }
+  font-size: 70px;
+}
+.display {
+  height: 150px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 10px;
+  min-height: 80x;
+  text-align: end;
+  white-space: nowrap;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  color: #61dafb;
+  font-weight: lighter;
+
+}
+.history {
+  min-height: 25px;
+  font-size: 25px;
+}

@@ -6,8 +6,11 @@
 }
 .logo-container {
     position: relative;
-    width: calc(32px + 2vmin);
+    width: calc(30px + 2vmin);
     height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
   
 @media (prefers-reduced-motion: no-preference) {
@@ -24,9 +27,10 @@
     font-size: calc(15px + 2vmin);
 }
 h1 {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: lighter;
+    font-family:'Digital-7','Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     padding-bottom: 10px;
+    font-weight: lighter;
+    letter-spacing: 5px;
 
 }
 
