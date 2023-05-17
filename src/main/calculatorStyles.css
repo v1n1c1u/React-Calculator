@@ -7,9 +7,6 @@
     box-shadow: 5px 5px 10px black;
 
 }
-#zero-button{
-    width: 180px;
-}
 #keyboard{
     display: flex;
     flex-wrap: wrap;
@@ -18,5 +15,11 @@
     align-items: center;
     margin: auto;
     background-color: rgb(6, 61, 61);
-    
+}
+
+@media screen and (max-width:400px) {
+    .calculator {
+        height:651px;
+        width: 385px;
+    }
 }

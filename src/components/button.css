@@ -40,6 +40,16 @@ button:disabled {
 .number:active{
   background-color: rgb(33, 106, 114);
 }
-#zero-button{
-  width: 203px;
+.double-size{
+  width: 202px;
+}
+
+@media screen and (max-width:400px) {
+  button {
+      height:94px;
+      width: 94px;
+  }
+  .double-size {
+    width: 190px;
+  }
 }

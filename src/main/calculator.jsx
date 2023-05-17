@@ -143,7 +143,7 @@ export default class Calculator extends Component {
                     <Button buttonClass="number" label="2" click={()=> this.addDigit(2)}/>
                     <Button buttonClass="number" label="3" click={()=> this.addDigit(3)}/>
                     <Button buttonClass="operator" label="+" click={()=> this.setOperation("+")}/>
-                    <Button buttonClass="number" id="zero-button" label="0" click={()=> this.addDigit(0)}/>
+                    <Button buttonClass="number double-size" label="0" click={()=> this.addDigit(0)}/>
                     <Button buttonClass="number" label="." click={()=> this.addDigit(".")}/>
                     <Button buttonClass="operator" label="=" click={()=> this.setOperation("=")}/>
                 </div>    
