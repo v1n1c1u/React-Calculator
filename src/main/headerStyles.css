@@ -5,12 +5,13 @@
     position: relative;
 }
 .logo-container {
-    position: relative;
     width: calc(30px + 2vmin);
-    height: auto;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 10px;
+    padding-right: 1px;
 }
   
 @media (prefers-reduced-motion: no-preference) {
@@ -24,14 +25,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(15px + 2vmin);
+    font-size: calc(3px + 2vmin);
 }
 h1 {
-    font-family:'Digital-7','Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family:'Orbitron','Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     padding-bottom: 10px;
-    font-weight: lighter;
+    font-weight: bold;
+    text-transform: uppercase;
     letter-spacing: 5px;
-
 }
 
   

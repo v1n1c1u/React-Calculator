@@ -18,28 +18,28 @@ button:disabled {
     background-color: rgb(110, 184, 187);
     opacity: 0.5;
 }
-.special-button {
-    background-color: darkslategray;
-  }
-  
-  .special-button:active {
-    background-color:rgb(65, 105, 105);
-  }
-  .operator-button {
-    background-color: #61dafb;/* #00a892;*/
-    color: darkslategray;
-    font-size: 65px;
-    font-weight: normal;
-  }
-  .operator-button:active {
-    background-color:#6cfae7;
-  }
-  .number-button {
-    background-color: rgb(23, 78, 85);
-  }
-  .number-button:active{
-    background-color: rgb(33, 106, 114);
-  }
-  #zero-button{
-    width: 203px;
-  }
+.special {
+  background-color: darkslategray;
+}
+
+.special:active {
+  background-color:rgb(65, 105, 105);
+}
+.operator {
+  background-color: #61dafb;/* #00a892;*/
+  color: darkslategray;
+  font-size: 65px;
+  font-weight: normal;
+}
+.operator:active {
+  background-color:#6cfae7;
+}
+.number {
+  background-color: rgb(23, 78, 85);
+}
+.number:active{
+  background-color: rgb(33, 106, 114);
+}
+#zero-button{
+  width: 203px;
+}

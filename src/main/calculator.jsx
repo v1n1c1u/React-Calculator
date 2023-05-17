@@ -9,7 +9,7 @@ const initialState = {
     operation: null,
     values: [],
     current: 0,
-    history: []
+    history: ''
 }
 
 export default class Calculator extends Component {
@@ -37,21 +37,15 @@ export default class Calculator extends Component {
                 displayValue='0';
             }
             this.setState({displayValue});
-            
         }
     }
     setOperation(op){
         let displayValue = this.state.displayValue;
-        let history = this.state.history;
         if(displayValue.length=== 0){
             console.log("invalid expression");
             return;
         }
-        history.push(displayValue);
-        history.push(op);
-        this.calculatePartialSolution(op);
-        this.setState({history});
-        
+        this.calculatePartialSolution(op);        
     }
     addDigit(digit){
         if(digit === '.' && this.state.displayValue.includes('.')){
@@ -95,14 +89,16 @@ export default class Calculator extends Component {
         let values = this.state.values;
         let history = this.state.history;
         values.push(parseFloat(displayValue));
+        console.log(values);
         if(values.length === 3){
             partialSolution = parseFloat(this.calculate(values[0],values[1],values[2]));
             if(Math.abs(partialSolution) === Infinity || isNaN(partialSolution)){
                 values.pop();
                 console.log("CANNOT DIVIDE BY ZERO!");
+                return false;
             }
             if(op==='='){
-                //history = values[0] +' '+ values[1] + ' ' + values[3];
+                history = values[0] +' '+ values[1] + ' ' + values[2] + ' =';
                 values = [];
                 displayValue = partialSolution;
             }else{
@@ -110,14 +106,19 @@ export default class Calculator extends Component {
                 values.push(parseFloat(partialSolution));
                 values.push(op);
                 displayValue = '0';
-                //history = partialSolution +' '+ op;
+                history = partialSolution +' '+ op;
             }
         }else{
+            if(op === '='){
+                console.log("INVALID EXPRESSION!");
+                return false;
+            }
             values.push(op);
-            //history = displayValue +' '+ op;
+            history = displayValue +' '+ op;
             displayValue = '0';
         }
         this.setState({displayValue,values, history});
+        return true;
     }
     render() {
         //const addDigit = n => this.addDigit(n);
@@ -126,25 +127,25 @@ export default class Calculator extends Component {
             <div className="calculator">
                 <Display value={this.state.displayValue} history={this.state.history}/>
                 <div id="keyboard">
-                    <Button buttonClass="special-button"label="AC" click={()=> this.clearMemory()}/>
-                    <Button buttonClass="special-button"  label="C" click={()=> this.backspace()}>C</Button>
-                    <Button buttonClass="special-button" label="%" click={()=> this.setOperation("%")}/>
-                    <Button buttonClass="operator-button"  label="÷" click={()=> this.setOperation("/")}/>
-                    <Button buttonClass="number-button"  label="7" click={()=> this.addDigit(7)}/>
-                    <Button buttonClass="number-button" label="8" click={()=> this.addDigit(8)}/>
-                    <Button buttonClass="number-button" label="9" click={()=> this.addDigit(9)}/>
-                    <Button buttonClass="operator-button" label="×" click={()=> this.setOperation("*")}/>
-                    <Button buttonClass="number-button"label="4" click={()=> this.addDigit(4)}/>
-                    <Button buttonClass="number-button"label="5" click={()=> this.addDigit(5)}/>
-                    <Button buttonClass="number-button"label="6" click={()=> this.addDigit(6)}/>
-                    <Button buttonClass="operator-button" label="-" click={()=> this.setOperation("-")}/>
-                    <Button buttonClass="number-button" label="1" click={()=> this.addDigit(1)}/>
-                    <Button buttonClass="number-button" label="2" click={()=> this.addDigit(2)}/>
-                    <Button buttonClass="number-button" label="3" click={()=> this.addDigit(3)}/>
-                    <Button buttonClass="operator-button" label="+" click={()=> this.setOperation("+")}/>
-                    <Button buttonClass="number-button" id="zero-button" label="0" click={()=> this.addDigit(0)}/>
-                    <Button buttonClass="number-button" label="." click={()=> this.addDigit(".")}/>
-                    <Button buttonClass="operator-button" label="=" click={()=> this.setOperation("=")}/>
+                    <Button buttonClass="special"label="AC" click={()=> this.clearMemory()}/>
+                    <Button buttonClass="special" label="C" click={()=> this.backspace()}/>
+                    <Button buttonClass="special" label="%" click={()=> this.setOperation("%")}/>
+                    <Button buttonClass="operator" label="÷" click={()=> this.setOperation("/")}/>
+                    <Button buttonClass="number" label="7" click={()=> this.addDigit(7)}/>
+                    <Button buttonClass="number" label="8" click={()=> this.addDigit(8)}/>
+                    <Button buttonClass="number" label="9" click={()=> this.addDigit(9)}/>
+                    <Button buttonClass="operator" label="×" click={()=> this.setOperation("*")}/>
+                    <Button buttonClass="number"label="4" click={()=> this.addDigit(4)}/>
+                    <Button buttonClass="number"label="5" click={()=> this.addDigit(5)}/>
+                    <Button buttonClass="number"label="6" click={()=> this.addDigit(6)}/>
+                    <Button buttonClass="operator" label="-" click={()=> this.setOperation("-")}/>
+                    <Button buttonClass="number" label="1" click={()=> this.addDigit(1)}/>
+                    <Button buttonClass="number" label="2" click={()=> this.addDigit(2)}/>
+                    <Button buttonClass="number" label="3" click={()=> this.addDigit(3)}/>
+                    <Button buttonClass="operator" label="+" click={()=> this.setOperation("+")}/>
+                    <Button buttonClass="number" id="zero-button" label="0" click={()=> this.addDigit(0)}/>
+                    <Button buttonClass="number" label="." click={()=> this.addDigit(".")}/>
+                    <Button buttonClass="operator" label="=" click={()=> this.setOperation("=")}/>
                 </div>    
             </div>
         )

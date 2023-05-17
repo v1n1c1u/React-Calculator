@@ -2,6 +2,10 @@
   font-family: 'Digital-7';
   src: url('./fonts/digital-7.ttf');
 }
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./fonts/Orbitron-VariableFont_wght.ttf');
+}
 
 body {
   overflow:hidden;
@@ -13,6 +17,6 @@ body {
   justify-content: center;
   align-items: center;
 
-  background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #2C5364, #203A43, #0F2027);
+  background: -webkit-linear-gradient(to left, #203A43, #2C5364, #0F2027);  /* #2C5364 203A43 #0F2027 Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #203A43, #2C5364, #0F2027);
 }
