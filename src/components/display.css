@@ -1,5 +1,6 @@
 .display-text {
   font-size: 70px;
+  min-height: 80px;
 }
 .display {
   height: 150px;

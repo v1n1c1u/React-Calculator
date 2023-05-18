@@ -4,9 +4,10 @@ import {faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons';
 import './footer.css';
 
 const footer = () => {
+    let currentYear = (new Date()).getFullYear();
     return (
     <footer>
-        Vinícius Souza © 2023
+        Vinícius Souza © {currentYear}
         <ul>
             <li>
                 <a href="https://github.com/v1n1c1u" target="_blank" rel="noreferrer">
