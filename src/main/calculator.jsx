@@ -8,6 +8,7 @@ import { publish } from "../events";
 const initialState = {
     displayValue: '0',
     clearDisplay:false,
+    start:true,
     operation: null,
     values: [],
     current: 0,
@@ -29,42 +30,109 @@ export default class Calculator extends Component {
         this.calculate = this.calculate.bind(this);
         this.calculatePartialSolution = this.calculatePartialSolution.bind(this);
         this.isOperator = this.isOperator.bind(this);
+        this.equalsTo = this.equalsTo.bind(this);
+
     }
 
     clearMemory(){
         this.setState({...initialState});
     }
     backspace(){
-        if(this.state.displayValue !=='0'){
-            const currentDisplayValue = this.state.displayValue;
-            let displayValue = currentDisplayValue.slice(0,currentDisplayValue.length-1);
-            this.setState({displayValue});
+        var displayValue = this.state.displayValue;
+        var values = this.state.values;
+        var history = this.state.history;
+        if(displayValue.length === 0 && this.isOperator(values[values.length-1])){
+            displayValue = values.shift();
+            values.pop();
+            history = '';
+        }else{
+            displayValue = (displayValue+"").slice(0,displayValue.length-1);
         }
+        this.setState({displayValue, values, history});
     }
     isOperator(val){
         const operators = ["+","-","/","*","%"];
         return operators.includes(val);
     }
     setOperation(op){
-        const values = this.state.values;
-        console.log(values);
-        if(values.length>10 && this.isOperator(values[values.length-1])){
+        var values = this.state.values;
+        var displayValue = this.state.displayValue + "";
+        if(displayValue.indexOf('.') === displayValue.length-1){
             publish("calculationError", {message:"Invalid expression!"})
             console.log("Error: Invalid Expression");
             return;
         }
-        this.calculatePartialSolution(op);        
+        values.push(parseFloat(displayValue));
+        this.setState({values});
+        const partialSolution = this.calculatePartialSolution();
+        if(partialSolution !== 'undefined'){
+            console.log("here");
+            values = [];
+            values.push(parseFloat(partialSolution));
+            values.push(op);
+            displayValue = '';
+            var history = this.state.history;
+            history = partialSolution + " " + op;
+            this.setState({displayValue,history,values});
+        }
+
+
     }
     addDigit(digit){
-        if(digit === '.' && this.state.displayValue.includes('.')){
+        var displayValue = this.state.displayValue;
+        if(digit === '.' && displayValue.includes('.')){
             publish("calculationError", {message:"Invalid expression!"})
-            return;
+            console.log("Error: Invalid Expression");
+        }else{
+            if(displayValue === '0' && digit !== '.'){
+                displayValue = '';
+            }
+            displayValue+=digit;
+            this.setState({displayValue, clearDisplay:false});
         }
-        const clearDisplay = (this.state.displayValue === '0' && digit !== '.' )|| this.state.clearDisplay;
-        const currentValue = clearDisplay ? '':this.state.displayValue;
-        const displayValue = currentValue + digit;
-        this.setState({displayValue, clearDisplay:false});
 
+    }
+
+    calculatePartialSolution(){
+        let displayValue = this.state.displayValue;
+        let partialSolution = displayValue;
+        let values = this.state.values;
+        let history = this.state.history;
+        console.log(values);
+        if(values.length === 3){
+            partialSolution = parseFloat(this.calculate(values[0],values[1],values[2]));
+            if(Math.abs(partialSolution) === Infinity || isNaN(partialSolution)){
+                values.pop();
+                this.setState({displayValue,values,history});
+                publish('calculationError', {message:"Cannot divide by zero!"});
+                return;
+            }
+        }
+        return partialSolution;
+    }
+    equalsTo() {
+        let displayValue = this.state.displayValue;
+        let values = this.state.values;
+        let history = this.state.history;
+        if(values.length===0 && displayValue.length > 0){
+            history = displayValue + " = ";
+            this.setState({displayValue,values,history});
+            return;
+        }else{
+            if(displayValue.length===0){
+                publish("calculationError", {message:"Invalid expression!"})
+                console.log("Error: Invalid Expression");
+            }
+            values.push(parseFloat(displayValue));
+            history += displayValue + " = ";
+            displayValue = this.calculatePartialSolution();
+            if(displayValue !== 'undefined'){
+                values = [displayValue];
+            }else {
+                publish("calculationError", {message:"Invalid expression!"})
+            }
+        }
+        this.setState({displayValue,values,history});
     }
     calculate(num1, op, num2){
         let result = 0;
@@ -93,42 +161,6 @@ export default class Calculator extends Component {
         }
         return result;
     }
-    calculatePartialSolution(op){
-        let displayValue = this.state.displayValue;
-        let partialSolution;
-        let values = this.state.values;
-        let history = this.state.history;
-        values.push(parseFloat(displayValue));
-        if(values.length === 3){
-            partialSolution = parseFloat(this.calculate(values[0],values[1],values[2]));
-            if(Math.abs(partialSolution) === Infinity || isNaN(partialSolution)){
-                values.pop();
-                publish('calculationError', {message:"Cannot divide by zero!"});
-                return;
-            }
-            values = [];
-            if(op==='='){
-                history = values[0] +' '+ values[1] + ' ' + values[2] + ' =';
-                displayValue = partialSolution;
-            }else{
-                values.push(parseFloat(partialSolution));
-                values.push(op);
-                displayValue = '';
-                history = partialSolution +' '+ op;
-            }
-        }else{
-            if(op === '='){
-                publish("calculationError", {message:"Invalid expression!"})
-                console.log("INVALID EXPRESSION!");
-                return;
-            }
-            values.push(op);
-            history = displayValue +' '+ op;
-            displayValue = '';
-        }
-        this.setState({displayValue,values, history});
-        return true;
-    }
     render() {
         return (
             <React.Fragment>
@@ -154,7 +186,7 @@ export default class Calculator extends Component {
                         <Button buttonClass="operator" label="+" click={()=> this.setOperation("+")}/>
                         <Button buttonClass="number double-size" label="0" click={()=> this.addDigit(0)}/>
                         <Button buttonClass="number" label="." click={()=> this.addDigit(".")}/>
-                        <Button buttonClass="operator" label="=" click={()=> this.setOperation("=")}/>
+                        <Button buttonClass="operator" label="=" click={()=> this.equalsTo()}/>
                     </div>    
                 </div>
             </React.Fragment>
