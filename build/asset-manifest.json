@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.12dbe635.css",
+    "main.js": "/static/js/main.30a285ca.js",
+    "static/js/787.97c71ab1.chunk.js": "/static/js/787.97c71ab1.chunk.js",
+    "static/media/Orbitron-VariableFont_wght.ttf": "/static/media/Orbitron-VariableFont_wght.d2ba51164ec36dc6d390.ttf",
+    "static/media/logo-cropped.svg": "/static/media/logo-cropped.7d7d4779a8191a0cb59a637ded9f8216.svg",
+    "index.html": "/index.html",
+    "main.12dbe635.css.map": "/static/css/main.12dbe635.css.map",
+    "main.30a285ca.js.map": "/static/js/main.30a285ca.js.map",
+    "787.97c71ab1.chunk.js.map": "/static/js/787.97c71ab1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.12dbe635.css",
+    "static/js/main.30a285ca.js"
+  ]
+}
